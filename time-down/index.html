@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="assets/css/demo.css" />
+</head>
+<body>
+	<!-- coidea:loader START -->
+    <div class="loader">
+      <div class="lds-ripple">
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <nav id="nav">
+      <button id="prev" class="nav-item" data-increment="-1">
+        <img src="assets/img/icon-prev.png" alt="prev" />
+      </button>
+      <button id="next" class="nav-item" data-increment="1">
+        <img src="assets/img/icon-next.png" alt="next" />
+      </button>
+    </nav>
+    <!-- coidea:slideshow:navigation END -->
+
+    <!-- coidea:slideshow START -->
+    <section class="coidea-3d-carousel">
+      <div class="stage">
+        
+        <!-- coidea:slideshow:item START -->
+        <div class="item">
+          <div class="bcg" style="background-image: url(assets/img/img-1.jpeg);"></div>
+          <div class="content">
+            <div class="description">
+              <p class="description-target">太君倒计时</p>
+            </div>
+            <div class="headline">
+              <h2 class="headline-target count"
+              id="count"></h2>
+            </div>
+            <div class="discover-more">
+              <a href="https://qdmmz.gitee.io/woking-man" class="discover-more-target">太君摸鱼证据</a>
+            </div>
+          </div>
+        </div>
+        <!-- coidea:slideshow:item END -->
+
+        <!-- coidea:slideshow:item START -->
+        <div class="item">
+          <div class="bcg" style="background-image: url(assets/img/img-2.jpeg);"></div>
+          <div class="content">
+            <div class="description">
+              <p class="description-target">太君推荐学习网站</p>
+            </div>
+            <div class="headline">
+              <h2 class="headline-target">www.pronhub.com</h2>
+            </div>
+            <div class="discover-more">
+              <a href="#" class="discover-more-target">
+                <img src="assets/img/img-4.png" alt="">
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- coidea:slideshow:item END -->
+
+        <!-- coidea:slideshow:item START -->
+       
+        <!-- coidea:slideshow:item END -->
+
+      </div>
+    </section>
+    <!-- coidea:slideshow END -->
+
+   <script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@4.1.4/imagesloaded.pkgd.min.js"></script>
+    <script src="assets/js/demo.js"></script>
+    <script>
+      window.onload = function () {
+        //获取并设置当天时间
+        function getCurrentDate() {
+          var now = new Date();
+          var year = now.getFullYear(); //得到年份
+          var month = now.getMonth() + 1; //得到月份
+          var date = now.getDate(); //得到日期
+          var EndTime = "18:00:00"; //你下班的时间
+          var time = year + "/" + month + "/" + date + "," + EndTime;
+          return time;
+        }
+        let XB_Times = getCurrentDate(); //处理时间
+  
+        function addZero(i) {
+          return i < 10 ? "0" + i : i + "";
+        }
+        function countDown() {
+          var nowtime = new Date();
+          var endtime = new Date(XB_Times);
+          var lefttime = parseInt((endtime.getTime() - nowtime.getTime()) / 1000);
+          var d = parseInt(lefttime / (24 * 60 * 60));
+          var h = parseInt((lefttime / (60 * 60)) % 24);
+          var m = parseInt((lefttime / 60) % 60);
+          var s = parseInt(lefttime % 60);
+          d = addZero(d);
+          h = addZero(h);
+          m = addZero(m);
+          s = addZero(s);
+          document.getElementById(
+            "count"
+          ).innerHTML = `${d}天 ${h} 时 ${m} 分 ${s} 秒`;
+          if (lefttime <= 0) {
+            document.getElementById("count").innerHTML = "已经下班啦";
+            return;
+          }
+          setTimeout(() => {
+            countDown(XB_Times);
+          }, 1000);
+        }
+        countDown(XB_Times);
+      };
+    </script>
+</body>
+</html>
